@@ -1,1 +1,18 @@
-<p>sign-up works!</p>
+<div class="container">
+  <p>Register</p>
+  <form #registerForm="ngForm" (ngSubmit)="Register()">
+    <label class="form-control" for="username">
+      Username:
+      <input id="username" type="email" placeholder="username" required="required" name="username"
+             [(ngModel)]="username" autocomplete="email"
+             pattern="^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$">
+    </label>
+    <label class="form-control" for="password">
+      Password:
+      <input id="password" type="password" placeholder="password" required="required" name="password"
+             [(ngModel)]="password">
+    </label>
+    <input class="form-control" type="submit" value="Submit" [disabled]="registerForm.invalid">
+  </form>
+
+</div>
