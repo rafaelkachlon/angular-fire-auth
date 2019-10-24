@@ -24,7 +24,6 @@ export class AuthService {
       } else {
         localStorage.setItem('user', null);
         console.log(JSON.parse(localStorage.getItem('user')));
-        this.router.navigate(['sign-in']);
 
       }
     });
@@ -54,7 +53,7 @@ export class AuthService {
       .then((result) => {
         /* Call the SendVerificaitonMail() function when new user sign
         up and returns promise */
-        debugger;
+
         this.SendVerificationMail();
         this.SetUserData(result.user);
       }).catch((error) => {

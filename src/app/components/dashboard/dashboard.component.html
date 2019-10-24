@@ -1,3 +1,27 @@
-<p>dashboard works!</p>
-
 <button (click)="Logout()">Logout</button>
+<div class="container">
+  <p>Dashboard</p>
+  <form #createForm="ngForm" (ngSubmit)="CreateGuide()">
+    <label class="form-control" for="title">
+      Title:
+      <input id="title" type="text" required="required" name="title"
+             [(ngModel)]="title">
+    </label>
+    <label class="form-control" for="content">
+      Content:
+      <input id="content" type="text" required="required" name="content"
+             [(ngModel)]="content">
+    </label>
+    <input class="form-control" type="submit" value="Submit" [disabled]="createForm.invalid">
+  </form>
+
+  <div>
+    <ul>
+      <li *ngFor="let guide of guides">
+        <div>{{guide.title}}</div>
+        <div>{{guide.content}}</div>
+        <button (click)="DeleteGuide(guide.id)">X</button>
+      </li>
+    </ul>
+  </div>
+</div>
