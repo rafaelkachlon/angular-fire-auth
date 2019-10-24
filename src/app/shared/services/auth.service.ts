@@ -3,6 +3,8 @@ import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestor
 import {AngularFireAuth} from '@angular/fire/auth';
 import {Router} from '@angular/router';
 import {User} from './user';
+import {auth} from 'firebase/app';
+
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +41,17 @@ export class AuthService {
       }).catch((error) => {
         window.alert(error.message);
       });
+  }
+
+  SignInWithGoogle() {
+    this.fireAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then((result) => {
+      this.ngZone.run(() => {
+        this.router.navigate(['dashboard']);
+      });
+      this.SetUserData(result.user);
+    }).catch((error) => {
+      window.alert(error.message);
+    });
   }
 
   SignOut() {
@@ -83,9 +96,12 @@ export class AuthService {
     });
   }
 
-   isLoggedIn(): boolean {
+  isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user'));
     return (user !== null && user.emailVerified !== false) ? true : false;
   }
 
+  GetUserId(): string {
+    return this.userData.uid;
+  }
 }

@@ -14,9 +14,6 @@ export class SignInComponent implements OnInit {
 
   constructor(public auth: AuthService,
               public router: Router) {
-    if (this.auth.isLoggedIn()) {
-      this.router.navigate(['dashboard']);
-    }
   }
 
   ngOnInit() {
@@ -24,6 +21,10 @@ export class SignInComponent implements OnInit {
 
   Login() {
     this.auth.SignIn(this.username, this.password);
+  }
+
+  LoginWithGoogle() {
+    this.auth.SignInWithGoogle();
   }
 
 }

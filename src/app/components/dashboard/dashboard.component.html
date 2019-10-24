@@ -1,26 +1,27 @@
 <button (click)="Logout()">Logout</button>
 <div class="container">
   <p>Dashboard</p>
-  <form #createForm="ngForm" (ngSubmit)="CreateGuide()">
+  <form #createForm="ngForm" (ngSubmit)="CreateExpense()">
     <label class="form-control" for="title">
       Title:
       <input id="title" type="text" required="required" name="title"
              [(ngModel)]="title">
     </label>
     <label class="form-control" for="content">
-      Content:
-      <input id="content" type="text" required="required" name="content"
-             [(ngModel)]="content">
+      Price:
+      <input id="content" type="number" required="required" name="content"
+             [(ngModel)]="price">
     </label>
     <input class="form-control" type="submit" value="Submit" [disabled]="createForm.invalid">
   </form>
 
   <div>
     <ul>
-      <li *ngFor="let guide of guides">
-        <div>{{guide.title}}</div>
-        <div>{{guide.content}}</div>
-        <button (click)="DeleteGuide(guide.id)">X</button>
+      <li *ngFor="let expense of expenses | async">
+        <div>{{expense.title}}</div>
+        <div>{{expense.price}}</div>
+        <div>{{expense.addedOn}}</div>
+        <button (click)="DeleteExpense(expense.id)">X</button>
       </li>
     </ul>
   </div>

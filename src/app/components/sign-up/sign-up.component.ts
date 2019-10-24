@@ -14,9 +14,6 @@ export class SignUpComponent implements OnInit {
 
   constructor(public auth: AuthService,
               public router: Router) {
-    if (this.auth.isLoggedIn()) {
-      this.router.navigate(['dashboard']);
-    }
   }
 
   ngOnInit() {
