@@ -3,7 +3,7 @@ import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestor
 import {AngularFireAuth} from '@angular/fire/auth';
 import {Router} from '@angular/router';
 import {User} from './user';
-import {auth} from 'firebase/app';
+import {auth, UserInfo} from 'firebase/app';
 
 
 @Injectable({
@@ -11,7 +11,8 @@ import {auth} from 'firebase/app';
 })
 export class AuthService {
 
-  userData: any;
+  userData: User;
+  fbUser: UserInfo;
 
   constructor(public fireStore: AngularFirestore,
               public fireAuth: AngularFireAuth,
@@ -22,10 +23,8 @@ export class AuthService {
       if (user) {
         this.userData = user;
         localStorage.setItem('user', JSON.stringify(this.userData));
-        console.log(JSON.parse(localStorage.getItem('user')));
       } else {
         localStorage.setItem('user', null);
-        console.log(JSON.parse(localStorage.getItem('user')));
 
       }
     });
@@ -101,7 +100,7 @@ export class AuthService {
     return (user !== null && user.emailVerified !== false) ? true : false;
   }
 
-  GetUserId(): string {
-    return this.userData.uid;
+  GetUserData(): User {
+    return this.userData;
   }
 }

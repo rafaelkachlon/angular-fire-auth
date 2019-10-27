@@ -1,0 +1,18 @@
+<div class="container">
+  <app-header title="הפרופיל שלי" backPath="dashboard"></app-header>
+
+  <div>
+    שם:
+    <span *ngIf="!editName">{{GetUserName()}}</span>
+    <span *ngIf="!editName" (click)="editName = true" style="float: left;margin-right: 50px;">ערוך</span>
+    <input *ngIf="editName" type="text" [(ngModel)]="user.displayName">
+    <span *ngIf="editName" style="float: left;margin-right: 50px;" (click)="EditName()">זהו</span>
+  </div>
+  <div>
+    מייל: {{user.email}}
+
+  </div>
+  <div>
+    <img width="50px" src="{{user.photoURL}}">
+  </div>
+</div>

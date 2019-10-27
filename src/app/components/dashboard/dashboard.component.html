@@ -1,27 +1,60 @@
-<button (click)="Logout()">Logout</button>
 <div class="container">
-  <p>Dashboard</p>
-  <form #createForm="ngForm" (ngSubmit)="CreateExpense()">
+  <app-header title="רשימת ההוצאות"></app-header>
+  <div>שלום,
+    <div (click)="UpdateProfile()">{{GetUserName()}}</div>
+  </div>
+  <button (click)="Logout()">Logout</button>
+  <button (click)="addListFlag=true">הוסף רשימה</button>
+
+  <form #createForm="ngForm" (ngSubmit)="CreateExpense()" *ngIf="addListFlag">
     <label class="form-control" for="title">
-      Title:
-      <input id="title" type="text" required="required" name="title"
-             [(ngModel)]="title">
+      שם רשימה:
+      <div>
+        <input id="title" type="text" required="required" name="title"
+               [(ngModel)]="title">
+      </div>
     </label>
-    <label class="form-control" for="content">
-      Price:
-      <input id="content" type="number" required="required" name="content"
-             [(ngModel)]="price">
+    <label class="form-control" for="description">
+      תיאור:
+      <div>
+
+        <input id="description" type="text" required="required" name="description"
+               [(ngModel)]="description">
+      </div>
+    </label>
+
+    <label class="form-control">
+      שתף עם:
+      <div (click)="AddShareWithField()">+</div>
+      <div *ngFor="let item of shareWith; let i = index">
+        <input type="text" name="shareWith_{{i}}"
+               [(ngModel)]="item.email">
+      </div>
     </label>
     <input class="form-control" type="submit" value="Submit" [disabled]="createForm.invalid">
   </form>
 
   <div>
+    <p *ngIf="(expenses| async)?.length > 0">הרשימות שלי</p>
     <ul>
       <li *ngFor="let expense of expenses | async">
-        <div>{{expense.title}}</div>
-        <div>{{expense.price}}</div>
-        <div>{{expense.addedOn}}</div>
-        <button (click)="DeleteExpense(expense.id)">X</button>
+        <div [routerLink]="['/expenses',expense.id]">
+          <div>{{expense.title}}</div>
+          <div>{{expense.description}}</div>
+          <div>{{expense.createdDate.toDate() | date:'dd/MM/yy HH:mm'}}</div>
+        </div>
+        <button (click)="DeleteExpenseList(expense.id)">X</button>
+      </li>
+    </ul>
+  </div>
+  <div>
+    <p *ngIf="(sharedExpenses$| async)?.length > 0">רשימות ששותפו איתי</p>
+    <ul>
+      <li *ngFor="let ex of sharedExpenses$ | async">
+        <div>{{ex.title}}</div>
+        <div>{{ex.description}}</div>
+        <div>{{ex.createdDate.toDate() | date:'dd/MM/yy HH:mm'}}</div>
+        <button (click)="DeleteExpenseList(ex.id)">X</button>
       </li>
     </ul>
   </div>

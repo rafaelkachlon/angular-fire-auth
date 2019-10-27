@@ -14,6 +14,9 @@ import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import {FormsModule} from '@angular/forms';
+import { UpdateProfileComponent } from './components/update-profile/update-profile.component';
+import { HeaderComponent } from './components/shared/header/header.component';
+import { ExpensesListComponent } from './components/expenses-list/expenses-list.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,10 @@ import {FormsModule} from '@angular/forms';
     SignInComponent,
     SignUpComponent,
     ForgotPasswordComponent,
-    VerifyEmailComponent
+    VerifyEmailComponent,
+    UpdateProfileComponent,
+    HeaderComponent,
+    ExpensesListComponent
   ],
   imports: [
     BrowserModule,

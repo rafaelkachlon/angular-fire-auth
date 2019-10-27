@@ -1,0 +1,13 @@
+<div class="container">
+  <app-header title="{{title}}" backPath="dashboard"></app-header>
+  <ul>
+    <li *ngFor="let expense of expenses | async">
+      <div [routerLink]="['/expenses',expense.id]">
+        <div>{{expense.title}}</div>
+        <div>{{expense.price}}</div>
+        <div>{{expense.createdDate.toDate() | date:'dd/MM/yy HH:mm'}}</div>
+      </div>
+<!--      <button (click)="DeleteExpenseList(expense.id)">X</button>-->
+    </li>
+  </ul>
+</div>

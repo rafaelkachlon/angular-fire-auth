@@ -21,9 +21,6 @@ export class SignUpComponent implements OnInit {
   }
 
   Register() {
-    console.log(this.username);
-    console.log(this.password);
-    debugger;
     this.auth.SignUp(this.username, this.password);
   }
 
